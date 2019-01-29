@@ -197,3 +197,23 @@ choosebitrate() {
   cp -afr $MODPATH/system/lib/hw/BITRATES/$(echo $BITRATE)/bluetooth.default.so $MODPATH/system/lib/hw/bluetooth.default.so
   rm -rf $MODPATH/system/lib/hw/BITRATES
 }
+
+osver_fn() {
+# Variables
+DEVFND=0
+OS_VER="
+Android7
+"
+# OS check
+for ITEM in $OS_VER; do
+  if [ $(echo $(getprop ro.build.software.version) | cut -c8) -ge $(echo $ITEM | cut -c8) ] ; then
+    ui_print "- $(echo $(getprop ro.build.software.version)) detected."
+    DEVFND=1
+    break
+  fi
+done
+# Abort if no match
+if [ $DEVFND == 0 ]; then
+  abort "Android is older then Android 7 or modified build.prop! Aborting."
+fi
+}

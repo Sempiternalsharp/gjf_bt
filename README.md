@@ -23,3 +23,5 @@ Most likely Lineage OS and Lineage-based OS (like AICP) are not supported - plea
 v.5 First Release in Repository
 
 v.5.1 Added x86 support in keycheck
+
+v.5.2 Added OS version check
