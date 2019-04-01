@@ -27,3 +27,5 @@ v.5.1 Added x86 support in keycheck
 v.5.2 Added OS version check
 
 v.5.3 Changed OS version check method
+
+v.5.4 Updated keychecks files, updated to latest installation template
