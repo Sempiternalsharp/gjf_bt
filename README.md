@@ -19,13 +19,14 @@ These changes will increase a quality of the sound when using wireless audio.
 Most likely Lineage OS and Lineage-based OS (like AICP) are not supported - please let me know if Bluetooth cannot be switched on after installing this module. In this case simply delete the module and reboot - everything will be restored.
 
 ## ChangeLog ##
+* v.5.5 Implememnted René Schümann aka White-Tiger fix for install.sh, possibly will fix keycheck and infinite loop issues
 
-v.5 First Release in Repository
+* v.5.4 Updated keychecks files, updated to latest installation template
 
-v.5.1 Added x86 support in keycheck
+* v.5.3 Changed OS version check method
 
-v.5.2 Added OS version check
+* v.5.2 Added OS version check
 
-v.5.3 Changed OS version check method
+* v.5.1 Added x86 support in keycheck
 
-v.5.4 Updated keychecks files, updated to latest installation template
+* v.5 First Release in Repository
