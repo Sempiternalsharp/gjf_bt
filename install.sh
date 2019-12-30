@@ -138,6 +138,17 @@ on_install() {
   # Extend/change the logic to whatever you want
   ui_print "- Extracting module files"
   unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
+
+  if [ "$ARCH32" == "arm" ]; then
+    KEYCHECK=keycheck-arm
+  else
+    KEYCHECK=keycheck-x86
+  fi
+  # Keycheck binary by someone755 @Github
+  unzip -o "$ZIPFILE" 'common/$KEYCHECK' -d $TMPDIR
+  KEYCHECK="$TMPDIR/$KEYCHECK"
+  chmod 0755 $KEYCHECK
+
   #Place for check functions
   osver_fn
   #Let's ask which bitrate is needed
@@ -190,9 +201,9 @@ chooseportold() {
   $KEYCHECK
   $KEYCHECK
   SEL=$?
-  if [ "$1" == "UP" ]; then
+  if [ "$1" = "UP" ]; then
     UP=$SEL
-  elif [ "$1" == "DOWN" ]; then
+  elif [ "$1" = "DOWN" ]; then
     DOWN=$SEL
   elif [ $SEL -eq $UP ]; then
     return 1
@@ -205,14 +216,6 @@ chooseportold() {
 }
 
 choosebitrate() {
-  # Keycheck binary by someone755 @Github, idea for code below by Zappo @xda-developers
-  if "$ARCH32" == "arm"; then
-	KEYCHECK=$TMPDIR/common/keycheck-arm
-		else
-			KEYCHECK=$TMPDIR/common/keycheck-x86
-  fi
-  chmod 755 $KEYCHECK
-
   if keytest; then
     FUNCTION=chooseport
   else
@@ -225,11 +228,17 @@ choosebitrate() {
     $FUNCTION "DOWN"
   fi
     BITRATE=0
+    LOOP=0
 	while [ $BITRATE -eq 0 ]; do
 		ui_print " "
-		ui_print " - Select Bitrate for SBC codec -"
+		ui_print " - Select Bitrate for SBC codec - ($LOOP)"
 		ui_print "   Choose which bitrate you want to install:"
 		ui_print "   Vol- = 454 kbit/s (works in most cases), Vol+ = higher"
+		if [ $LOOP -eq 10 ]; then
+			BITRATE=454
+			break
+		fi
+		$((++LOOP))
 		if $FUNCTION; then BITRATE=454
 			else 
 				ui_print " "
@@ -270,6 +279,6 @@ SDK_VER=23
   fi
 # Abort if no match
 if [ $DEVFND == 0 ]; then
-  abort "Android is older then Android 6 or modified build.prop! Aborting."
+  abort "Android is older than Android 6 or modified build.prop! Aborting."
 fi
 }
