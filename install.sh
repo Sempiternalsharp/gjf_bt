@@ -271,14 +271,15 @@ osver_fn() {
 # Variables
 DEVFND=0
 SDK_VER=23
+SDK_VER_MAX=29
 # SDK check
-  if [ $API -ge $SDK_VER ] ; then
+  if [ $API -ge $SDK_VER ] && [ $API -lt $SDK_VER_MAX ]; then
     ui_print "SDK$API detected. It is supported."
     DEVFND=1
     break
   fi
 # Abort if no match
 if [ $DEVFND == 0 ]; then
-  abort "Android is older than Android 6 or modified build.prop! Aborting."
+  abort "Android is older than Android 6, newer than Android 9 or modified build.prop! Aborting."
 fi
 }
