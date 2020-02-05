@@ -27,7 +27,7 @@ These changes will increase a quality of the sound when using wireless audio.
 Most likely Lineage OS and Lineage-based OS (like AICP) are not supported - please let me know if Bluetooth cannot be switched on after installing this module. In this case simply delete the module and reboot - everything will be restored.
 
 ## ChangeLog ##
-* v.5.6 Android 10 is blacklisted
+* v.5.6 Android 10 (and newer) is blacklisted
 
 * v.5.5 Implememnted René Schümann aka White-Tiger fix for install.sh, possibly will fix keycheck and infinite loop issues
 
